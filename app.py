@@ -28,6 +28,7 @@ def new_game():
 
     return jsonify({"game_id": game_id, "board": game.board})
 
+
 @app.post("/api/score-word")
 def score_word():
     """check if word is legal and on board"""
@@ -47,5 +48,3 @@ def score_word():
         response = {"result": "not-on-board"}
 
     return jsonify(response)
-
-
