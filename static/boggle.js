@@ -43,8 +43,11 @@ function displayBoard(board) {
 
 start();
 
+
+/**handles word submit */
 async function submitWord(evt) {
   evt.preventDefault();
+  $message.text("")
   const word = $wordInput.val();
 
   const response = await fetch(`/api/score-word`, {
@@ -58,8 +61,32 @@ async function submitWord(evt) {
 
   const wordScoreData = await response.json();
   if (wordScoreData.result === "ok") {
-    //TODO:put it on the DOM
+    displayWord(word);
   }
+
+  else {
+    displayMessage(wordScoreData.result);
+  }
+
 }
 
 $form.on("submit", submitWord);
+
+
+/** Displays Message on gameboard when user inputs invalid word  */
+function displayMessage(result){
+
+  if(result === "not-word"){
+    $message.text("Not Valid Word");
+  }
+  if (result === "not-on-board"){
+    $message.text("Word Not On Board");
+  }
+// else if here for when we address duplicates
+}
+
+/**Displays word on gameboard when user inputs valid word */
+function displayWord(word){
+  $playedWords.append(`<li>${word}</li>`);
+
+}
