@@ -17,7 +17,8 @@ async function start() {
   });
   const gameData = await response.json();
 
-  gameId = gameData.gameId;
+  // gameId = gameData.gameId;
+  gameId = gameData["game_id"];
   let board = gameData.board;
 
   displayBoard(board);
@@ -55,7 +56,7 @@ async function submitWord(evt) {
     })
   });
 
-  wordScoreData = await response.json();
+  const wordScoreData = await response.json();
   if (wordScoreData.result === "ok") {
     //TODO:put it on the DOM
   }
