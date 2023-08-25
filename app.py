@@ -30,7 +30,8 @@ def new_game():
 
 @app.post("/api/score-word")
 def score_word():
-    #accept post request with JSON for game id and word / check if word is legal
+    """check if word is legal and on board"""
+
     request_data = request.get_json()
 
     game_id = request_data["game_id"]
